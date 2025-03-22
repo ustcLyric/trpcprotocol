@@ -8,5 +8,6 @@ import "user_info.proto";
 
 service UserService {
     rpc GetUserInfo (GetUserInfoReq) returns (GetUserInfoReq){};
+    rpc Hello (GetUserInfoReq) returns (GetUserInfoReq){};
 }
 

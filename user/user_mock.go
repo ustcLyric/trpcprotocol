@@ -56,6 +56,21 @@ func (mr *MockUserServiceServiceMockRecorder) GetUserInfo(ctx, req any) *gomock.
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserInfo", reflect.TypeOf((*MockUserServiceService)(nil).GetUserInfo), ctx, req)
 }
 
+// Hello mocks base method.
+func (m *MockUserServiceService) Hello(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Hello", ctx, req)
+	ret0, _ := ret[0].(*GetUserInfoReq)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Hello indicates an expected call of Hello.
+func (mr *MockUserServiceServiceMockRecorder) Hello(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockUserServiceService)(nil).Hello), ctx, req)
+}
+
 // MockUserServiceClientProxy is a mock of UserServiceClientProxy interface.
 type MockUserServiceClientProxy struct {
 	ctrl     *gomock.Controller
@@ -98,4 +113,24 @@ func (mr *MockUserServiceClientProxyMockRecorder) GetUserInfo(ctx, req any, opts
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserInfo", reflect.TypeOf((*MockUserServiceClientProxy)(nil).GetUserInfo), varargs...)
+}
+
+// Hello mocks base method.
+func (m *MockUserServiceClientProxy) Hello(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoReq, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Hello", varargs...)
+	ret0, _ := ret[0].(*GetUserInfoReq)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Hello indicates an expected call of Hello.
+func (mr *MockUserServiceClientProxyMockRecorder) Hello(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockUserServiceClientProxy)(nil).Hello), varargs...)
 }
