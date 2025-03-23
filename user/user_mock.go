@@ -71,6 +71,21 @@ func (mr *MockUserServiceServiceMockRecorder) Hello(ctx, req any) *gomock.Call {
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockUserServiceService)(nil).Hello), ctx, req)
 }
 
+// Hello1 mocks base method.
+func (m *MockUserServiceService) Hello1(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "Hello1", ctx, req)
+	ret0, _ := ret[0].(*GetUserInfoReq)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Hello1 indicates an expected call of Hello1.
+func (mr *MockUserServiceServiceMockRecorder) Hello1(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello1", reflect.TypeOf((*MockUserServiceService)(nil).Hello1), ctx, req)
+}
+
 // MockUserServiceClientProxy is a mock of UserServiceClientProxy interface.
 type MockUserServiceClientProxy struct {
 	ctrl     *gomock.Controller
@@ -133,4 +148,24 @@ func (mr *MockUserServiceClientProxyMockRecorder) Hello(ctx, req any, opts ...an
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockUserServiceClientProxy)(nil).Hello), varargs...)
+}
+
+// Hello1 mocks base method.
+func (m *MockUserServiceClientProxy) Hello1(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoReq, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "Hello1", varargs...)
+	ret0, _ := ret[0].(*GetUserInfoReq)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// Hello1 indicates an expected call of Hello1.
+func (mr *MockUserServiceClientProxyMockRecorder) Hello1(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello1", reflect.TypeOf((*MockUserServiceClientProxy)(nil).Hello1), varargs...)
 }

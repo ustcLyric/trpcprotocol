@@ -22,6 +22,8 @@ type UserServiceService interface {
 	GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error)
 
 	Hello(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error)
+
+	Hello1(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error)
 }
 
 func UserServiceService_GetUserInfo_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -60,6 +62,24 @@ func UserServiceService_Hello_Handler(svr interface{}, ctx context.Context, f se
 	return rsp, nil
 }
 
+func UserServiceService_Hello1_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &GetUserInfoReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(UserServiceService).Hello1(ctx, reqbody.(*GetUserInfoReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // UserServiceServer_ServiceDesc descriptor for server.RegisterService.
 var UserServiceServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "trpc.polarbear.user.UserService",
@@ -72,6 +92,10 @@ var UserServiceServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/trpc.polarbear.user.UserService/Hello",
 			Func: UserServiceService_Hello_Handler,
+		},
+		{
+			Name: "/trpc.polarbear.user.UserService/Hello1",
+			Func: UserServiceService_Hello1_Handler,
 		},
 	},
 }
@@ -93,6 +117,9 @@ func (s *UnimplementedUserService) GetUserInfo(ctx context.Context, req *GetUser
 func (s *UnimplementedUserService) Hello(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error) {
 	return nil, errors.New("rpc Hello of service UserService is not implemented")
 }
+func (s *UnimplementedUserService) Hello1(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoReq, error) {
+	return nil, errors.New("rpc Hello1 of service UserService is not implemented")
+}
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
@@ -105,6 +132,8 @@ type UserServiceClientProxy interface {
 	GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (rsp *GetUserInfoReq, err error)
 
 	Hello(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (rsp *GetUserInfoReq, err error)
+
+	Hello1(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (rsp *GetUserInfoReq, err error)
 }
 
 type UserServiceClientProxyImpl struct {
@@ -145,6 +174,26 @@ func (c *UserServiceClientProxyImpl) Hello(ctx context.Context, req *GetUserInfo
 	msg.WithCalleeServer("user")
 	msg.WithCalleeService("UserService")
 	msg.WithCalleeMethod("Hello")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &GetUserInfoReq{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *UserServiceClientProxyImpl) Hello1(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoReq, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/trpc.polarbear.user.UserService/Hello1")
+	msg.WithCalleeServiceName(UserServiceServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("polarbear")
+	msg.WithCalleeServer("user")
+	msg.WithCalleeService("UserService")
+	msg.WithCalleeMethod("Hello1")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
