@@ -1,4 +1,4 @@
-module github.com/ustcLyric/trpcprotocol
+module github.com/ustcLyric/trpcprotocol/user
 
 go 1.22
 
