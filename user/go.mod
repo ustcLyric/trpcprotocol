@@ -1,4 +1,4 @@
-module github.com/ustcLyric/trpcprotocol/user
+module github.com/ustcLyric/trpcprotocol
 
 go 1.22
 
@@ -6,7 +6,7 @@ toolchain go1.23.6
 
 require (
 	go.uber.org/mock v0.5.0
-	google.golang.org/protobuf v1.36.5
+	google.golang.org/protobuf v1.36.6
 	trpc.group/trpc-go/trpc-go v1.0.3
 )
 
