@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package trpc.polarBear.user;
-option go_package = "github.com/ustcLyric/trpcprotocol/user";
+option go_package = "github.com/ustcLyric/trpcprotocol/polar_bear_user";
 
 // HelloRequest is hello request.
 message HelloRequest {
