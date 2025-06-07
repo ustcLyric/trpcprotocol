@@ -41,19 +41,34 @@ func (m *MockHelloWorldServiceService) EXPECT() *MockHelloWorldServiceServiceMoc
 	return m.recorder
 }
 
-// Hello mocks base method.
-func (m *MockHelloWorldServiceService) Hello(ctx context.Context, req *HelloRequest) (*HelloResponse, error) {
+// UserLogin mocks base method.
+func (m *MockHelloWorldServiceService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Hello", ctx, req)
-	ret0, _ := ret[0].(*HelloResponse)
+	ret := m.ctrl.Call(m, "UserLogin", ctx, req)
+	ret0, _ := ret[0].(*UserLoginResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// Hello indicates an expected call of Hello.
-func (mr *MockHelloWorldServiceServiceMockRecorder) Hello(ctx, req any) *gomock.Call {
+// UserLogin indicates an expected call of UserLogin.
+func (mr *MockHelloWorldServiceServiceMockRecorder) UserLogin(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockHelloWorldServiceService)(nil).Hello), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserLogin", reflect.TypeOf((*MockHelloWorldServiceService)(nil).UserLogin), ctx, req)
+}
+
+// UserRegister mocks base method.
+func (m *MockHelloWorldServiceService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UserRegister", ctx, req)
+	ret0, _ := ret[0].(*UserRegisterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UserRegister indicates an expected call of UserRegister.
+func (mr *MockHelloWorldServiceServiceMockRecorder) UserRegister(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockHelloWorldServiceService)(nil).UserRegister), ctx, req)
 }
 
 // MockHelloWorldServiceClientProxy is a mock of HelloWorldServiceClientProxy interface.
@@ -80,22 +95,42 @@ func (m *MockHelloWorldServiceClientProxy) EXPECT() *MockHelloWorldServiceClient
 	return m.recorder
 }
 
-// Hello mocks base method.
-func (m *MockHelloWorldServiceClientProxy) Hello(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloResponse, error) {
+// UserLogin mocks base method.
+func (m *MockHelloWorldServiceClientProxy) UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (*UserLoginResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
-	ret := m.ctrl.Call(m, "Hello", varargs...)
-	ret0, _ := ret[0].(*HelloResponse)
+	ret := m.ctrl.Call(m, "UserLogin", varargs...)
+	ret0, _ := ret[0].(*UserLoginResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
-// Hello indicates an expected call of Hello.
-func (mr *MockHelloWorldServiceClientProxyMockRecorder) Hello(ctx, req any, opts ...any) *gomock.Call {
+// UserLogin indicates an expected call of UserLogin.
+func (mr *MockHelloWorldServiceClientProxyMockRecorder) UserLogin(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Hello", reflect.TypeOf((*MockHelloWorldServiceClientProxy)(nil).Hello), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserLogin", reflect.TypeOf((*MockHelloWorldServiceClientProxy)(nil).UserLogin), varargs...)
+}
+
+// UserRegister mocks base method.
+func (m *MockHelloWorldServiceClientProxy) UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (*UserRegisterResponse, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "UserRegister", varargs...)
+	ret0, _ := ret[0].(*UserRegisterResponse)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// UserRegister indicates an expected call of UserRegister.
+func (mr *MockHelloWorldServiceClientProxyMockRecorder) UserRegister(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockHelloWorldServiceClientProxy)(nil).UserRegister), varargs...)
 }

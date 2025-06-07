@@ -19,18 +19,38 @@ import (
 
 // HelloWorldServiceService defines service.
 type HelloWorldServiceService interface {
-	// Hello Hello says hello.
-	Hello(ctx context.Context, req *HelloRequest) (*HelloResponse, error)
+	// UserRegister UserRegister
+	UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error)
+	// UserLogin UserLogin
+	UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error)
 }
 
-func HelloWorldServiceService_Hello_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &HelloRequest{}
+func HelloWorldServiceService_UserRegister_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserRegisterRequest{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(HelloWorldServiceService).Hello(ctx, reqbody.(*HelloRequest))
+		return svr.(HelloWorldServiceService).UserRegister(ctx, reqbody.(*UserRegisterRequest))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func HelloWorldServiceService_UserLogin_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &UserLoginRequest{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(HelloWorldServiceService).UserLogin(ctx, reqbody.(*UserLoginRequest))
 	}
 
 	var rsp interface{}
@@ -47,8 +67,12 @@ var HelloWorldServiceServer_ServiceDesc = server.ServiceDesc{
 	HandlerType: ((*HelloWorldServiceService)(nil)),
 	Methods: []server.Method{
 		{
-			Name: "/trpc.polarBear.user.HelloWorldService/Hello",
-			Func: HelloWorldServiceService_Hello_Handler,
+			Name: "/trpc.polarBear.user.HelloWorldService/UserRegister",
+			Func: HelloWorldServiceService_UserRegister_Handler,
+		},
+		{
+			Name: "/trpc.polarBear.user.HelloWorldService/UserLogin",
+			Func: HelloWorldServiceService_UserLogin_Handler,
 		},
 	},
 }
@@ -64,9 +88,14 @@ func RegisterHelloWorldServiceService(s server.Service, svr HelloWorldServiceSer
 
 type UnimplementedHelloWorldService struct{}
 
-// Hello Hello says hello.
-func (s *UnimplementedHelloWorldService) Hello(ctx context.Context, req *HelloRequest) (*HelloResponse, error) {
-	return nil, errors.New("rpc Hello of service HelloWorldService is not implemented")
+// UserRegister UserRegister
+func (s *UnimplementedHelloWorldService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
+	return nil, errors.New("rpc UserRegister of service HelloWorldService is not implemented")
+}
+
+// UserLogin UserLogin
+func (s *UnimplementedHelloWorldService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
+	return nil, errors.New("rpc UserLogin of service HelloWorldService is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -77,8 +106,10 @@ func (s *UnimplementedHelloWorldService) Hello(ctx context.Context, req *HelloRe
 
 // HelloWorldServiceClientProxy defines service client proxy
 type HelloWorldServiceClientProxy interface {
-	// Hello Hello says hello.
-	Hello(ctx context.Context, req *HelloRequest, opts ...client.Option) (rsp *HelloResponse, err error)
+	// UserRegister UserRegister
+	UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (rsp *UserRegisterResponse, err error)
+	// UserLogin UserLogin
+	UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (rsp *UserLoginResponse, err error)
 }
 
 type HelloWorldServiceClientProxyImpl struct {
@@ -90,20 +121,40 @@ var NewHelloWorldServiceClientProxy = func(opts ...client.Option) HelloWorldServ
 	return &HelloWorldServiceClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *HelloWorldServiceClientProxyImpl) Hello(ctx context.Context, req *HelloRequest, opts ...client.Option) (*HelloResponse, error) {
+func (c *HelloWorldServiceClientProxyImpl) UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (*UserRegisterResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/trpc.polarBear.user.HelloWorldService/Hello")
+	msg.WithClientRPCName("/trpc.polarBear.user.HelloWorldService/UserRegister")
 	msg.WithCalleeServiceName(HelloWorldServiceServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("polarBear")
 	msg.WithCalleeServer("user")
 	msg.WithCalleeService("HelloWorldService")
-	msg.WithCalleeMethod("Hello")
+	msg.WithCalleeMethod("UserRegister")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &HelloResponse{}
+	rsp := &UserRegisterResponse{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *HelloWorldServiceClientProxyImpl) UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (*UserLoginResponse, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/trpc.polarBear.user.HelloWorldService/UserLogin")
+	msg.WithCalleeServiceName(HelloWorldServiceServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("polarBear")
+	msg.WithCalleeServer("user")
+	msg.WithCalleeService("HelloWorldService")
+	msg.WithCalleeMethod("UserLogin")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &UserLoginResponse{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

@@ -1,0 +1,12 @@
+# Makefile
+
+.PHONY: create
+
+create:
+	@echo "start"
+	@find . -name "*.proto" | xargs -I  {} trpc create --protofile={} --rpconly
+	@go mod tidy
+	@echo "end"
+
+
+
