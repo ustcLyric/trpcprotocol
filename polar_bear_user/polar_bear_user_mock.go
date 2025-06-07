@@ -17,32 +17,32 @@ import (
 	client "trpc.group/trpc-go/trpc-go/client"
 )
 
-// MockHelloWorldServiceService is a mock of HelloWorldServiceService interface.
-type MockHelloWorldServiceService struct {
+// MockPolarBearUserServiceService is a mock of PolarBearUserServiceService interface.
+type MockPolarBearUserServiceService struct {
 	ctrl     *gomock.Controller
-	recorder *MockHelloWorldServiceServiceMockRecorder
+	recorder *MockPolarBearUserServiceServiceMockRecorder
 	isgomock struct{}
 }
 
-// MockHelloWorldServiceServiceMockRecorder is the mock recorder for MockHelloWorldServiceService.
-type MockHelloWorldServiceServiceMockRecorder struct {
-	mock *MockHelloWorldServiceService
+// MockPolarBearUserServiceServiceMockRecorder is the mock recorder for MockPolarBearUserServiceService.
+type MockPolarBearUserServiceServiceMockRecorder struct {
+	mock *MockPolarBearUserServiceService
 }
 
-// NewMockHelloWorldServiceService creates a new mock instance.
-func NewMockHelloWorldServiceService(ctrl *gomock.Controller) *MockHelloWorldServiceService {
-	mock := &MockHelloWorldServiceService{ctrl: ctrl}
-	mock.recorder = &MockHelloWorldServiceServiceMockRecorder{mock}
+// NewMockPolarBearUserServiceService creates a new mock instance.
+func NewMockPolarBearUserServiceService(ctrl *gomock.Controller) *MockPolarBearUserServiceService {
+	mock := &MockPolarBearUserServiceService{ctrl: ctrl}
+	mock.recorder = &MockPolarBearUserServiceServiceMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockHelloWorldServiceService) EXPECT() *MockHelloWorldServiceServiceMockRecorder {
+func (m *MockPolarBearUserServiceService) EXPECT() *MockPolarBearUserServiceServiceMockRecorder {
 	return m.recorder
 }
 
 // UserLogin mocks base method.
-func (m *MockHelloWorldServiceService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
+func (m *MockPolarBearUserServiceService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UserLogin", ctx, req)
 	ret0, _ := ret[0].(*UserLoginResponse)
@@ -51,13 +51,13 @@ func (m *MockHelloWorldServiceService) UserLogin(ctx context.Context, req *UserL
 }
 
 // UserLogin indicates an expected call of UserLogin.
-func (mr *MockHelloWorldServiceServiceMockRecorder) UserLogin(ctx, req any) *gomock.Call {
+func (mr *MockPolarBearUserServiceServiceMockRecorder) UserLogin(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserLogin", reflect.TypeOf((*MockHelloWorldServiceService)(nil).UserLogin), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserLogin", reflect.TypeOf((*MockPolarBearUserServiceService)(nil).UserLogin), ctx, req)
 }
 
 // UserRegister mocks base method.
-func (m *MockHelloWorldServiceService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
+func (m *MockPolarBearUserServiceService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "UserRegister", ctx, req)
 	ret0, _ := ret[0].(*UserRegisterResponse)
@@ -66,37 +66,37 @@ func (m *MockHelloWorldServiceService) UserRegister(ctx context.Context, req *Us
 }
 
 // UserRegister indicates an expected call of UserRegister.
-func (mr *MockHelloWorldServiceServiceMockRecorder) UserRegister(ctx, req any) *gomock.Call {
+func (mr *MockPolarBearUserServiceServiceMockRecorder) UserRegister(ctx, req any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockHelloWorldServiceService)(nil).UserRegister), ctx, req)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockPolarBearUserServiceService)(nil).UserRegister), ctx, req)
 }
 
-// MockHelloWorldServiceClientProxy is a mock of HelloWorldServiceClientProxy interface.
-type MockHelloWorldServiceClientProxy struct {
+// MockPolarBearUserServiceClientProxy is a mock of PolarBearUserServiceClientProxy interface.
+type MockPolarBearUserServiceClientProxy struct {
 	ctrl     *gomock.Controller
-	recorder *MockHelloWorldServiceClientProxyMockRecorder
+	recorder *MockPolarBearUserServiceClientProxyMockRecorder
 	isgomock struct{}
 }
 
-// MockHelloWorldServiceClientProxyMockRecorder is the mock recorder for MockHelloWorldServiceClientProxy.
-type MockHelloWorldServiceClientProxyMockRecorder struct {
-	mock *MockHelloWorldServiceClientProxy
+// MockPolarBearUserServiceClientProxyMockRecorder is the mock recorder for MockPolarBearUserServiceClientProxy.
+type MockPolarBearUserServiceClientProxyMockRecorder struct {
+	mock *MockPolarBearUserServiceClientProxy
 }
 
-// NewMockHelloWorldServiceClientProxy creates a new mock instance.
-func NewMockHelloWorldServiceClientProxy(ctrl *gomock.Controller) *MockHelloWorldServiceClientProxy {
-	mock := &MockHelloWorldServiceClientProxy{ctrl: ctrl}
-	mock.recorder = &MockHelloWorldServiceClientProxyMockRecorder{mock}
+// NewMockPolarBearUserServiceClientProxy creates a new mock instance.
+func NewMockPolarBearUserServiceClientProxy(ctrl *gomock.Controller) *MockPolarBearUserServiceClientProxy {
+	mock := &MockPolarBearUserServiceClientProxy{ctrl: ctrl}
+	mock.recorder = &MockPolarBearUserServiceClientProxyMockRecorder{mock}
 	return mock
 }
 
 // EXPECT returns an object that allows the caller to indicate expected use.
-func (m *MockHelloWorldServiceClientProxy) EXPECT() *MockHelloWorldServiceClientProxyMockRecorder {
+func (m *MockPolarBearUserServiceClientProxy) EXPECT() *MockPolarBearUserServiceClientProxyMockRecorder {
 	return m.recorder
 }
 
 // UserLogin mocks base method.
-func (m *MockHelloWorldServiceClientProxy) UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (*UserLoginResponse, error) {
+func (m *MockPolarBearUserServiceClientProxy) UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (*UserLoginResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -109,14 +109,14 @@ func (m *MockHelloWorldServiceClientProxy) UserLogin(ctx context.Context, req *U
 }
 
 // UserLogin indicates an expected call of UserLogin.
-func (mr *MockHelloWorldServiceClientProxyMockRecorder) UserLogin(ctx, req any, opts ...any) *gomock.Call {
+func (mr *MockPolarBearUserServiceClientProxyMockRecorder) UserLogin(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserLogin", reflect.TypeOf((*MockHelloWorldServiceClientProxy)(nil).UserLogin), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserLogin", reflect.TypeOf((*MockPolarBearUserServiceClientProxy)(nil).UserLogin), varargs...)
 }
 
 // UserRegister mocks base method.
-func (m *MockHelloWorldServiceClientProxy) UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (*UserRegisterResponse, error) {
+func (m *MockPolarBearUserServiceClientProxy) UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (*UserRegisterResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
@@ -129,8 +129,8 @@ func (m *MockHelloWorldServiceClientProxy) UserRegister(ctx context.Context, req
 }
 
 // UserRegister indicates an expected call of UserRegister.
-func (mr *MockHelloWorldServiceClientProxyMockRecorder) UserRegister(ctx, req any, opts ...any) *gomock.Call {
+func (mr *MockPolarBearUserServiceClientProxyMockRecorder) UserRegister(ctx, req any, opts ...any) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	varargs := append([]any{ctx, req}, opts...)
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockHelloWorldServiceClientProxy)(nil).UserRegister), varargs...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UserRegister", reflect.TypeOf((*MockPolarBearUserServiceClientProxy)(nil).UserRegister), varargs...)
 }

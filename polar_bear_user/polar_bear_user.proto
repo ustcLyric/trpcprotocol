@@ -75,7 +75,7 @@ message UserLoginResponse {
 //}
 
 // HelloWorldService handles hello request and echo message.
-service HelloWorldService {
+service PolarBearUserService {
     // UserRegister
     rpc UserRegister(UserRegisterRequest) returns (UserRegisterResponse);
     // UserLogin

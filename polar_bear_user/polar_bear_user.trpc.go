@@ -17,22 +17,22 @@ import (
 
 // START ======================================= Server Service Definition ======================================= START
 
-// HelloWorldServiceService defines service.
-type HelloWorldServiceService interface {
+// PolarBearUserServiceService defines service.
+type PolarBearUserServiceService interface {
 	// UserRegister UserRegister
 	UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error)
 	// UserLogin UserLogin
 	UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error)
 }
 
-func HelloWorldServiceService_UserRegister_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+func PolarBearUserServiceService_UserRegister_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
 	req := &UserRegisterRequest{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(HelloWorldServiceService).UserRegister(ctx, reqbody.(*UserRegisterRequest))
+		return svr.(PolarBearUserServiceService).UserRegister(ctx, reqbody.(*UserRegisterRequest))
 	}
 
 	var rsp interface{}
@@ -43,14 +43,14 @@ func HelloWorldServiceService_UserRegister_Handler(svr interface{}, ctx context.
 	return rsp, nil
 }
 
-func HelloWorldServiceService_UserLogin_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+func PolarBearUserServiceService_UserLogin_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
 	req := &UserLoginRequest{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(HelloWorldServiceService).UserLogin(ctx, reqbody.(*UserLoginRequest))
+		return svr.(PolarBearUserServiceService).UserLogin(ctx, reqbody.(*UserLoginRequest))
 	}
 
 	var rsp interface{}
@@ -61,41 +61,41 @@ func HelloWorldServiceService_UserLogin_Handler(svr interface{}, ctx context.Con
 	return rsp, nil
 }
 
-// HelloWorldServiceServer_ServiceDesc descriptor for server.RegisterService.
-var HelloWorldServiceServer_ServiceDesc = server.ServiceDesc{
-	ServiceName: "trpc.polarBear.user.HelloWorldService",
-	HandlerType: ((*HelloWorldServiceService)(nil)),
+// PolarBearUserServiceServer_ServiceDesc descriptor for server.RegisterService.
+var PolarBearUserServiceServer_ServiceDesc = server.ServiceDesc{
+	ServiceName: "trpc.polarBear.user.PolarBearUserService",
+	HandlerType: ((*PolarBearUserServiceService)(nil)),
 	Methods: []server.Method{
 		{
-			Name: "/trpc.polarBear.user.HelloWorldService/UserRegister",
-			Func: HelloWorldServiceService_UserRegister_Handler,
+			Name: "/trpc.polarBear.user.PolarBearUserService/UserRegister",
+			Func: PolarBearUserServiceService_UserRegister_Handler,
 		},
 		{
-			Name: "/trpc.polarBear.user.HelloWorldService/UserLogin",
-			Func: HelloWorldServiceService_UserLogin_Handler,
+			Name: "/trpc.polarBear.user.PolarBearUserService/UserLogin",
+			Func: PolarBearUserServiceService_UserLogin_Handler,
 		},
 	},
 }
 
-// RegisterHelloWorldServiceService registers service.
-func RegisterHelloWorldServiceService(s server.Service, svr HelloWorldServiceService) {
-	if err := s.Register(&HelloWorldServiceServer_ServiceDesc, svr); err != nil {
-		panic(fmt.Sprintf("HelloWorldService register error:%v", err))
+// RegisterPolarBearUserServiceService registers service.
+func RegisterPolarBearUserServiceService(s server.Service, svr PolarBearUserServiceService) {
+	if err := s.Register(&PolarBearUserServiceServer_ServiceDesc, svr); err != nil {
+		panic(fmt.Sprintf("PolarBearUserService register error:%v", err))
 	}
 }
 
 // START --------------------------------- Default Unimplemented Server Service --------------------------------- START
 
-type UnimplementedHelloWorldService struct{}
+type UnimplementedPolarBearUserService struct{}
 
 // UserRegister UserRegister
-func (s *UnimplementedHelloWorldService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
-	return nil, errors.New("rpc UserRegister of service HelloWorldService is not implemented")
+func (s *UnimplementedPolarBearUserService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
+	return nil, errors.New("rpc UserRegister of service PolarBearUserService is not implemented")
 }
 
 // UserLogin UserLogin
-func (s *UnimplementedHelloWorldService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
-	return nil, errors.New("rpc UserLogin of service HelloWorldService is not implemented")
+func (s *UnimplementedPolarBearUserService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
+	return nil, errors.New("rpc UserLogin of service PolarBearUserService is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -104,31 +104,31 @@ func (s *UnimplementedHelloWorldService) UserLogin(ctx context.Context, req *Use
 
 // START ======================================= Client Service Definition ======================================= START
 
-// HelloWorldServiceClientProxy defines service client proxy
-type HelloWorldServiceClientProxy interface {
+// PolarBearUserServiceClientProxy defines service client proxy
+type PolarBearUserServiceClientProxy interface {
 	// UserRegister UserRegister
 	UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (rsp *UserRegisterResponse, err error)
 	// UserLogin UserLogin
 	UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (rsp *UserLoginResponse, err error)
 }
 
-type HelloWorldServiceClientProxyImpl struct {
+type PolarBearUserServiceClientProxyImpl struct {
 	client client.Client
 	opts   []client.Option
 }
 
-var NewHelloWorldServiceClientProxy = func(opts ...client.Option) HelloWorldServiceClientProxy {
-	return &HelloWorldServiceClientProxyImpl{client: client.DefaultClient, opts: opts}
+var NewPolarBearUserServiceClientProxy = func(opts ...client.Option) PolarBearUserServiceClientProxy {
+	return &PolarBearUserServiceClientProxyImpl{client: client.DefaultClient, opts: opts}
 }
 
-func (c *HelloWorldServiceClientProxyImpl) UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (*UserRegisterResponse, error) {
+func (c *PolarBearUserServiceClientProxyImpl) UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (*UserRegisterResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/trpc.polarBear.user.HelloWorldService/UserRegister")
-	msg.WithCalleeServiceName(HelloWorldServiceServer_ServiceDesc.ServiceName)
+	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/UserRegister")
+	msg.WithCalleeServiceName(PolarBearUserServiceServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("polarBear")
 	msg.WithCalleeServer("user")
-	msg.WithCalleeService("HelloWorldService")
+	msg.WithCalleeService("PolarBearUserService")
 	msg.WithCalleeMethod("UserRegister")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
@@ -141,14 +141,14 @@ func (c *HelloWorldServiceClientProxyImpl) UserRegister(ctx context.Context, req
 	return rsp, nil
 }
 
-func (c *HelloWorldServiceClientProxyImpl) UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (*UserLoginResponse, error) {
+func (c *PolarBearUserServiceClientProxyImpl) UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (*UserLoginResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
-	msg.WithClientRPCName("/trpc.polarBear.user.HelloWorldService/UserLogin")
-	msg.WithCalleeServiceName(HelloWorldServiceServer_ServiceDesc.ServiceName)
+	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/UserLogin")
+	msg.WithCalleeServiceName(PolarBearUserServiceServer_ServiceDesc.ServiceName)
 	msg.WithCalleeApp("polarBear")
 	msg.WithCalleeServer("user")
-	msg.WithCalleeService("HelloWorldService")
+	msg.WithCalleeService("PolarBearUserService")
 	msg.WithCalleeMethod("UserLogin")
 	msg.WithSerializationType(codec.SerializationTypePB)
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
