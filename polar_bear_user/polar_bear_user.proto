@@ -3,7 +3,6 @@ syntax = "proto3";
 package trpc.polarBear.user;
 option go_package = "github.com/ustcLyric/trpcprotocol/polar_bear_user";
 import "google/protobuf/timestamp.proto";
-
 // 注册用户
 // 用户注册请求
 message UserRegisterRequest {
@@ -77,7 +76,10 @@ message UserLoginResponse {
 // HelloWorldService handles hello request and echo message.
 service PolarBearUserService {
     // UserRegister
-    rpc UserRegister(UserRegisterRequest) returns (UserRegisterResponse);
+    rpc UserRegister(UserRegisterRequest) returns (UserRegisterResponse){
+    };
     // UserLogin
-    rpc UserLogin(UserLoginRequest) returns (UserLoginResponse);
+    rpc UserLogin(UserLoginRequest) returns (UserLoginResponse){
+    }; 
+
 }
