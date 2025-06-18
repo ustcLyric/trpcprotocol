@@ -41,6 +41,21 @@ func (m *MockPolarBearUserServiceService) EXPECT() *MockPolarBearUserServiceServ
 	return m.recorder
 }
 
+// GetUserInfo mocks base method.
+func (m *MockPolarBearUserServiceService) GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetUserInfo", ctx, req)
+	ret0, _ := ret[0].(*GetUserInfoResp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserInfo indicates an expected call of GetUserInfo.
+func (mr *MockPolarBearUserServiceServiceMockRecorder) GetUserInfo(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserInfo", reflect.TypeOf((*MockPolarBearUserServiceService)(nil).GetUserInfo), ctx, req)
+}
+
 // UserLogin mocks base method.
 func (m *MockPolarBearUserServiceService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
 	m.ctrl.T.Helper()
@@ -93,6 +108,26 @@ func NewMockPolarBearUserServiceClientProxy(ctrl *gomock.Controller) *MockPolarB
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockPolarBearUserServiceClientProxy) EXPECT() *MockPolarBearUserServiceClientProxyMockRecorder {
 	return m.recorder
+}
+
+// GetUserInfo mocks base method.
+func (m *MockPolarBearUserServiceClientProxy) GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoResp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetUserInfo", varargs...)
+	ret0, _ := ret[0].(*GetUserInfoResp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetUserInfo indicates an expected call of GetUserInfo.
+func (mr *MockPolarBearUserServiceClientProxyMockRecorder) GetUserInfo(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetUserInfo", reflect.TypeOf((*MockPolarBearUserServiceClientProxy)(nil).GetUserInfo), varargs...)
 }
 
 // UserLogin mocks base method.

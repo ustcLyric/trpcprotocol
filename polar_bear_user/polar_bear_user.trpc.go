@@ -19,10 +19,12 @@ import (
 
 // PolarBearUserServiceService defines service.
 type PolarBearUserServiceService interface {
-	// UserRegister UserRegister
+	// UserRegister 用户注册
 	UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error)
-	// UserLogin UserLogin
+	// UserLogin 用户登陆
 	UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error)
+	// GetUserInfo 获取用户信息
+	GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error)
 }
 
 func PolarBearUserServiceService_UserRegister_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -61,6 +63,24 @@ func PolarBearUserServiceService_UserLogin_Handler(svr interface{}, ctx context.
 	return rsp, nil
 }
 
+func PolarBearUserServiceService_GetUserInfo_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &GetUserInfoReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(PolarBearUserServiceService).GetUserInfo(ctx, reqbody.(*GetUserInfoReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // PolarBearUserServiceServer_ServiceDesc descriptor for server.RegisterService.
 var PolarBearUserServiceServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "trpc.polarBear.user.PolarBearUserService",
@@ -73,6 +93,10 @@ var PolarBearUserServiceServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/trpc.polarBear.user.PolarBearUserService/UserLogin",
 			Func: PolarBearUserServiceService_UserLogin_Handler,
+		},
+		{
+			Name: "/trpc.polarBear.user.PolarBearUserService/GetUserInfo",
+			Func: PolarBearUserServiceService_GetUserInfo_Handler,
 		},
 	},
 }
@@ -88,14 +112,19 @@ func RegisterPolarBearUserServiceService(s server.Service, svr PolarBearUserServ
 
 type UnimplementedPolarBearUserService struct{}
 
-// UserRegister UserRegister
+// UserRegister 用户注册
 func (s *UnimplementedPolarBearUserService) UserRegister(ctx context.Context, req *UserRegisterRequest) (*UserRegisterResponse, error) {
 	return nil, errors.New("rpc UserRegister of service PolarBearUserService is not implemented")
 }
 
-// UserLogin UserLogin
+// UserLogin 用户登陆
 func (s *UnimplementedPolarBearUserService) UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error) {
 	return nil, errors.New("rpc UserLogin of service PolarBearUserService is not implemented")
+}
+
+// GetUserInfo 获取用户信息
+func (s *UnimplementedPolarBearUserService) GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error) {
+	return nil, errors.New("rpc GetUserInfo of service PolarBearUserService is not implemented")
 }
 
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
@@ -106,10 +135,12 @@ func (s *UnimplementedPolarBearUserService) UserLogin(ctx context.Context, req *
 
 // PolarBearUserServiceClientProxy defines service client proxy
 type PolarBearUserServiceClientProxy interface {
-	// UserRegister UserRegister
+	// UserRegister 用户注册
 	UserRegister(ctx context.Context, req *UserRegisterRequest, opts ...client.Option) (rsp *UserRegisterResponse, err error)
-	// UserLogin UserLogin
+	// UserLogin 用户登陆
 	UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (rsp *UserLoginResponse, err error)
+	// GetUserInfo 获取用户信息
+	GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (rsp *GetUserInfoResp, err error)
 }
 
 type PolarBearUserServiceClientProxyImpl struct {
@@ -155,6 +186,26 @@ func (c *PolarBearUserServiceClientProxyImpl) UserLogin(ctx context.Context, req
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &UserLoginResponse{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *PolarBearUserServiceClientProxyImpl) GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoResp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/GetUserInfo")
+	msg.WithCalleeServiceName(PolarBearUserServiceServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("polarBear")
+	msg.WithCalleeServer("user")
+	msg.WithCalleeService("PolarBearUserService")
+	msg.WithCalleeMethod("GetUserInfo")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &GetUserInfoResp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
