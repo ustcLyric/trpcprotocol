@@ -80,10 +80,6 @@ message UserPermissionInfo {
         string created_at = 10;               // 创建时间
         string updated_at = 11;               // 修改时间
 }
-
-
-
-
 message UserInfo {
     string user_id = 1;              // 用户id
     string user_name = 2;            // 用户姓名
@@ -111,6 +107,52 @@ message UserInfo {
     string security_answer = 24;      // 安全问题答案
 }
 
+// 菜单信息获取请求
+message GetPermissionsReq {
+
+}
+// 菜单信息获取响应
+message GetPermissionsResp {
+    repeated Permission permissions = 1;
+}
+// 角色信息获取请求
+message GetRolesReq {
+
+}
+// 角色信息获取响应
+message GetRolesResp {
+    repeated Role roles = 1;
+}
+
+
+// 菜单权限消息
+message Permission {
+    string permission_id = 1; // 菜单id
+    string permission_name = 2; // 菜单名称
+    string permission_code = 3; // 菜单编码
+    string permission_value = 4; // 权限值
+    string permission_parent_id = 5; // 菜单父id
+    int32 permission_type = 6; // 类型 0表示菜单 1表示按钮
+    string path = 7; // 访问路径
+    string component = 8; // 组件路径
+    string icon = 9; // 图标
+    bool is_deleted = 10; // 逻辑删除标记
+    string created_at = 11; // 创建时间
+    string updated_at = 12; // 修改时间
+}
+
+
+// 角色消息
+message Role {
+    string role_id = 1; // 角色id
+    string role_name = 2; // 角色名称
+    string role_code = 3; // 角色编码
+    string remark = 4; // 备注
+    bool is_deleted = 5; // 逻辑删除标记，0表示未删除，1表示已删除
+    string created_at = 6; // 创建时间
+    string updated_at = 7; // 修改时间
+}
+
 // HelloWorldService handles hello request and echo message.
 service PolarBearUserService {
     // 用户注册
@@ -122,5 +164,10 @@ service PolarBearUserService {
     // 获取用户信息
     rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp){
     };
-
+    // 获取权限菜单信息
+    rpc GetPermissions(GetPermissionsReq) returns (GetPermissionsResp){
+    };
+    // 获取角色信息
+    rpc GetRoles(GetRolesReq) returns (GetRolesResp){
+    };
 }

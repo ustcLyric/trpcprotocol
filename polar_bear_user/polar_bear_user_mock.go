@@ -41,6 +41,36 @@ func (m *MockPolarBearUserServiceService) EXPECT() *MockPolarBearUserServiceServ
 	return m.recorder
 }
 
+// GetPermissions mocks base method.
+func (m *MockPolarBearUserServiceService) GetPermissions(ctx context.Context, req *GetPermissionsReq) (*GetPermissionsResp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetPermissions", ctx, req)
+	ret0, _ := ret[0].(*GetPermissionsResp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPermissions indicates an expected call of GetPermissions.
+func (mr *MockPolarBearUserServiceServiceMockRecorder) GetPermissions(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPermissions", reflect.TypeOf((*MockPolarBearUserServiceService)(nil).GetPermissions), ctx, req)
+}
+
+// GetRoles mocks base method.
+func (m *MockPolarBearUserServiceService) GetRoles(ctx context.Context, req *GetRolesReq) (*GetRolesResp, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetRoles", ctx, req)
+	ret0, _ := ret[0].(*GetRolesResp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetRoles indicates an expected call of GetRoles.
+func (mr *MockPolarBearUserServiceServiceMockRecorder) GetRoles(ctx, req any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRoles", reflect.TypeOf((*MockPolarBearUserServiceService)(nil).GetRoles), ctx, req)
+}
+
 // GetUserInfo mocks base method.
 func (m *MockPolarBearUserServiceService) GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error) {
 	m.ctrl.T.Helper()
@@ -108,6 +138,46 @@ func NewMockPolarBearUserServiceClientProxy(ctrl *gomock.Controller) *MockPolarB
 // EXPECT returns an object that allows the caller to indicate expected use.
 func (m *MockPolarBearUserServiceClientProxy) EXPECT() *MockPolarBearUserServiceClientProxyMockRecorder {
 	return m.recorder
+}
+
+// GetPermissions mocks base method.
+func (m *MockPolarBearUserServiceClientProxy) GetPermissions(ctx context.Context, req *GetPermissionsReq, opts ...client.Option) (*GetPermissionsResp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetPermissions", varargs...)
+	ret0, _ := ret[0].(*GetPermissionsResp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetPermissions indicates an expected call of GetPermissions.
+func (mr *MockPolarBearUserServiceClientProxyMockRecorder) GetPermissions(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetPermissions", reflect.TypeOf((*MockPolarBearUserServiceClientProxy)(nil).GetPermissions), varargs...)
+}
+
+// GetRoles mocks base method.
+func (m *MockPolarBearUserServiceClientProxy) GetRoles(ctx context.Context, req *GetRolesReq, opts ...client.Option) (*GetRolesResp, error) {
+	m.ctrl.T.Helper()
+	varargs := []any{ctx, req}
+	for _, a := range opts {
+		varargs = append(varargs, a)
+	}
+	ret := m.ctrl.Call(m, "GetRoles", varargs...)
+	ret0, _ := ret[0].(*GetRolesResp)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetRoles indicates an expected call of GetRoles.
+func (mr *MockPolarBearUserServiceClientProxyMockRecorder) GetRoles(ctx, req any, opts ...any) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	varargs := append([]any{ctx, req}, opts...)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetRoles", reflect.TypeOf((*MockPolarBearUserServiceClientProxy)(nil).GetRoles), varargs...)
 }
 
 // GetUserInfo mocks base method.

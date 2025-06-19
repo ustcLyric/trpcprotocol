@@ -25,6 +25,10 @@ type PolarBearUserServiceService interface {
 	UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error)
 	// GetUserInfo 获取用户信息
 	GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error)
+	// GetPermissions 获取权限菜单信息
+	GetPermissions(ctx context.Context, req *GetPermissionsReq) (*GetPermissionsResp, error)
+	// GetRoles 获取角色信息
+	GetRoles(ctx context.Context, req *GetRolesReq) (*GetRolesResp, error)
 }
 
 func PolarBearUserServiceService_UserRegister_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -81,6 +85,42 @@ func PolarBearUserServiceService_GetUserInfo_Handler(svr interface{}, ctx contex
 	return rsp, nil
 }
 
+func PolarBearUserServiceService_GetPermissions_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &GetPermissionsReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(PolarBearUserServiceService).GetPermissions(ctx, reqbody.(*GetPermissionsReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func PolarBearUserServiceService_GetRoles_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
+	req := &GetRolesReq{}
+	filters, err := f(req)
+	if err != nil {
+		return nil, err
+	}
+	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
+		return svr.(PolarBearUserServiceService).GetRoles(ctx, reqbody.(*GetRolesReq))
+	}
+
+	var rsp interface{}
+	rsp, err = filters.Filter(ctx, req, handleFunc)
+	if err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
 // PolarBearUserServiceServer_ServiceDesc descriptor for server.RegisterService.
 var PolarBearUserServiceServer_ServiceDesc = server.ServiceDesc{
 	ServiceName: "trpc.polarBear.user.PolarBearUserService",
@@ -97,6 +137,14 @@ var PolarBearUserServiceServer_ServiceDesc = server.ServiceDesc{
 		{
 			Name: "/trpc.polarBear.user.PolarBearUserService/GetUserInfo",
 			Func: PolarBearUserServiceService_GetUserInfo_Handler,
+		},
+		{
+			Name: "/trpc.polarBear.user.PolarBearUserService/GetPermissions",
+			Func: PolarBearUserServiceService_GetPermissions_Handler,
+		},
+		{
+			Name: "/trpc.polarBear.user.PolarBearUserService/GetRoles",
+			Func: PolarBearUserServiceService_GetRoles_Handler,
 		},
 	},
 }
@@ -127,6 +175,16 @@ func (s *UnimplementedPolarBearUserService) GetUserInfo(ctx context.Context, req
 	return nil, errors.New("rpc GetUserInfo of service PolarBearUserService is not implemented")
 }
 
+// GetPermissions 获取权限菜单信息
+func (s *UnimplementedPolarBearUserService) GetPermissions(ctx context.Context, req *GetPermissionsReq) (*GetPermissionsResp, error) {
+	return nil, errors.New("rpc GetPermissions of service PolarBearUserService is not implemented")
+}
+
+// GetRoles 获取角色信息
+func (s *UnimplementedPolarBearUserService) GetRoles(ctx context.Context, req *GetRolesReq) (*GetRolesResp, error) {
+	return nil, errors.New("rpc GetRoles of service PolarBearUserService is not implemented")
+}
+
 // END --------------------------------- Default Unimplemented Server Service --------------------------------- END
 
 // END ======================================= Server Service Definition ======================================= END
@@ -141,6 +199,10 @@ type PolarBearUserServiceClientProxy interface {
 	UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (rsp *UserLoginResponse, err error)
 	// GetUserInfo 获取用户信息
 	GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (rsp *GetUserInfoResp, err error)
+	// GetPermissions 获取权限菜单信息
+	GetPermissions(ctx context.Context, req *GetPermissionsReq, opts ...client.Option) (rsp *GetPermissionsResp, err error)
+	// GetRoles 获取角色信息
+	GetRoles(ctx context.Context, req *GetRolesReq, opts ...client.Option) (rsp *GetRolesResp, err error)
 }
 
 type PolarBearUserServiceClientProxyImpl struct {
@@ -206,6 +268,46 @@ func (c *PolarBearUserServiceClientProxyImpl) GetUserInfo(ctx context.Context, r
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
 	rsp := &GetUserInfoResp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *PolarBearUserServiceClientProxyImpl) GetPermissions(ctx context.Context, req *GetPermissionsReq, opts ...client.Option) (*GetPermissionsResp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/GetPermissions")
+	msg.WithCalleeServiceName(PolarBearUserServiceServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("polarBear")
+	msg.WithCalleeServer("user")
+	msg.WithCalleeService("PolarBearUserService")
+	msg.WithCalleeMethod("GetPermissions")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &GetPermissionsResp{}
+	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
+		return nil, err
+	}
+	return rsp, nil
+}
+
+func (c *PolarBearUserServiceClientProxyImpl) GetRoles(ctx context.Context, req *GetRolesReq, opts ...client.Option) (*GetRolesResp, error) {
+	ctx, msg := codec.WithCloneMessage(ctx)
+	defer codec.PutBackMessage(msg)
+	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/GetRoles")
+	msg.WithCalleeServiceName(PolarBearUserServiceServer_ServiceDesc.ServiceName)
+	msg.WithCalleeApp("polarBear")
+	msg.WithCalleeServer("user")
+	msg.WithCalleeService("PolarBearUserService")
+	msg.WithCalleeMethod("GetRoles")
+	msg.WithSerializationType(codec.SerializationTypePB)
+	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
+	callopts = append(callopts, c.opts...)
+	callopts = append(callopts, opts...)
+	rsp := &GetRolesResp{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
