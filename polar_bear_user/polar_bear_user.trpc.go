@@ -24,11 +24,11 @@ type PolarBearUserServiceService interface {
 	// UserLogin 用户登陆
 	UserLogin(ctx context.Context, req *UserLoginRequest) (*UserLoginResponse, error)
 	// GetUserInfo 获取用户信息
-	GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error)
+	GetUserInfo(ctx context.Context, req *GetUserInfoRequest) (*GetUserInfoResponse, error)
 	// GetPermissions 获取权限菜单信息
-	GetPermissions(ctx context.Context, req *GetPermissionsReq) (*GetPermissionsResp, error)
+	GetPermissions(ctx context.Context, req *GetPermissionsRequest) (*GetPermissionsResponse, error)
 	// GetRoles 获取角色信息
-	GetRoles(ctx context.Context, req *GetRolesReq) (*GetRolesResp, error)
+	GetRoles(ctx context.Context, req *GetRolesRequest) (*GetRolesResponse, error)
 }
 
 func PolarBearUserServiceService_UserRegister_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
@@ -68,13 +68,13 @@ func PolarBearUserServiceService_UserLogin_Handler(svr interface{}, ctx context.
 }
 
 func PolarBearUserServiceService_GetUserInfo_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &GetUserInfoReq{}
+	req := &GetUserInfoRequest{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(PolarBearUserServiceService).GetUserInfo(ctx, reqbody.(*GetUserInfoReq))
+		return svr.(PolarBearUserServiceService).GetUserInfo(ctx, reqbody.(*GetUserInfoRequest))
 	}
 
 	var rsp interface{}
@@ -86,13 +86,13 @@ func PolarBearUserServiceService_GetUserInfo_Handler(svr interface{}, ctx contex
 }
 
 func PolarBearUserServiceService_GetPermissions_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &GetPermissionsReq{}
+	req := &GetPermissionsRequest{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(PolarBearUserServiceService).GetPermissions(ctx, reqbody.(*GetPermissionsReq))
+		return svr.(PolarBearUserServiceService).GetPermissions(ctx, reqbody.(*GetPermissionsRequest))
 	}
 
 	var rsp interface{}
@@ -104,13 +104,13 @@ func PolarBearUserServiceService_GetPermissions_Handler(svr interface{}, ctx con
 }
 
 func PolarBearUserServiceService_GetRoles_Handler(svr interface{}, ctx context.Context, f server.FilterFunc) (interface{}, error) {
-	req := &GetRolesReq{}
+	req := &GetRolesRequest{}
 	filters, err := f(req)
 	if err != nil {
 		return nil, err
 	}
 	handleFunc := func(ctx context.Context, reqbody interface{}) (interface{}, error) {
-		return svr.(PolarBearUserServiceService).GetRoles(ctx, reqbody.(*GetRolesReq))
+		return svr.(PolarBearUserServiceService).GetRoles(ctx, reqbody.(*GetRolesRequest))
 	}
 
 	var rsp interface{}
@@ -171,17 +171,17 @@ func (s *UnimplementedPolarBearUserService) UserLogin(ctx context.Context, req *
 }
 
 // GetUserInfo 获取用户信息
-func (s *UnimplementedPolarBearUserService) GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error) {
+func (s *UnimplementedPolarBearUserService) GetUserInfo(ctx context.Context, req *GetUserInfoRequest) (*GetUserInfoResponse, error) {
 	return nil, errors.New("rpc GetUserInfo of service PolarBearUserService is not implemented")
 }
 
 // GetPermissions 获取权限菜单信息
-func (s *UnimplementedPolarBearUserService) GetPermissions(ctx context.Context, req *GetPermissionsReq) (*GetPermissionsResp, error) {
+func (s *UnimplementedPolarBearUserService) GetPermissions(ctx context.Context, req *GetPermissionsRequest) (*GetPermissionsResponse, error) {
 	return nil, errors.New("rpc GetPermissions of service PolarBearUserService is not implemented")
 }
 
 // GetRoles 获取角色信息
-func (s *UnimplementedPolarBearUserService) GetRoles(ctx context.Context, req *GetRolesReq) (*GetRolesResp, error) {
+func (s *UnimplementedPolarBearUserService) GetRoles(ctx context.Context, req *GetRolesRequest) (*GetRolesResponse, error) {
 	return nil, errors.New("rpc GetRoles of service PolarBearUserService is not implemented")
 }
 
@@ -198,11 +198,11 @@ type PolarBearUserServiceClientProxy interface {
 	// UserLogin 用户登陆
 	UserLogin(ctx context.Context, req *UserLoginRequest, opts ...client.Option) (rsp *UserLoginResponse, err error)
 	// GetUserInfo 获取用户信息
-	GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (rsp *GetUserInfoResp, err error)
+	GetUserInfo(ctx context.Context, req *GetUserInfoRequest, opts ...client.Option) (rsp *GetUserInfoResponse, err error)
 	// GetPermissions 获取权限菜单信息
-	GetPermissions(ctx context.Context, req *GetPermissionsReq, opts ...client.Option) (rsp *GetPermissionsResp, err error)
+	GetPermissions(ctx context.Context, req *GetPermissionsRequest, opts ...client.Option) (rsp *GetPermissionsResponse, err error)
 	// GetRoles 获取角色信息
-	GetRoles(ctx context.Context, req *GetRolesReq, opts ...client.Option) (rsp *GetRolesResp, err error)
+	GetRoles(ctx context.Context, req *GetRolesRequest, opts ...client.Option) (rsp *GetRolesResponse, err error)
 }
 
 type PolarBearUserServiceClientProxyImpl struct {
@@ -254,7 +254,7 @@ func (c *PolarBearUserServiceClientProxyImpl) UserLogin(ctx context.Context, req
 	return rsp, nil
 }
 
-func (c *PolarBearUserServiceClientProxyImpl) GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoResp, error) {
+func (c *PolarBearUserServiceClientProxyImpl) GetUserInfo(ctx context.Context, req *GetUserInfoRequest, opts ...client.Option) (*GetUserInfoResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/GetUserInfo")
@@ -267,14 +267,14 @@ func (c *PolarBearUserServiceClientProxyImpl) GetUserInfo(ctx context.Context, r
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &GetUserInfoResp{}
+	rsp := &GetUserInfoResponse{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
 	return rsp, nil
 }
 
-func (c *PolarBearUserServiceClientProxyImpl) GetPermissions(ctx context.Context, req *GetPermissionsReq, opts ...client.Option) (*GetPermissionsResp, error) {
+func (c *PolarBearUserServiceClientProxyImpl) GetPermissions(ctx context.Context, req *GetPermissionsRequest, opts ...client.Option) (*GetPermissionsResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/GetPermissions")
@@ -287,14 +287,14 @@ func (c *PolarBearUserServiceClientProxyImpl) GetPermissions(ctx context.Context
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &GetPermissionsResp{}
+	rsp := &GetPermissionsResponse{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}
 	return rsp, nil
 }
 
-func (c *PolarBearUserServiceClientProxyImpl) GetRoles(ctx context.Context, req *GetRolesReq, opts ...client.Option) (*GetRolesResp, error) {
+func (c *PolarBearUserServiceClientProxyImpl) GetRoles(ctx context.Context, req *GetRolesRequest, opts ...client.Option) (*GetRolesResponse, error) {
 	ctx, msg := codec.WithCloneMessage(ctx)
 	defer codec.PutBackMessage(msg)
 	msg.WithClientRPCName("/trpc.polarBear.user.PolarBearUserService/GetRoles")
@@ -307,7 +307,7 @@ func (c *PolarBearUserServiceClientProxyImpl) GetRoles(ctx context.Context, req 
 	callopts := make([]client.Option, 0, len(c.opts)+len(opts))
 	callopts = append(callopts, c.opts...)
 	callopts = append(callopts, opts...)
-	rsp := &GetRolesResp{}
+	rsp := &GetRolesResponse{}
 	if err := c.client.Invoke(ctx, req, rsp, callopts...); err != nil {
 		return nil, err
 	}

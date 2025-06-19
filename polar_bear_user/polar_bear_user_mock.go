@@ -42,10 +42,10 @@ func (m *MockPolarBearUserServiceService) EXPECT() *MockPolarBearUserServiceServ
 }
 
 // GetPermissions mocks base method.
-func (m *MockPolarBearUserServiceService) GetPermissions(ctx context.Context, req *GetPermissionsReq) (*GetPermissionsResp, error) {
+func (m *MockPolarBearUserServiceService) GetPermissions(ctx context.Context, req *GetPermissionsRequest) (*GetPermissionsResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetPermissions", ctx, req)
-	ret0, _ := ret[0].(*GetPermissionsResp)
+	ret0, _ := ret[0].(*GetPermissionsResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -57,10 +57,10 @@ func (mr *MockPolarBearUserServiceServiceMockRecorder) GetPermissions(ctx, req a
 }
 
 // GetRoles mocks base method.
-func (m *MockPolarBearUserServiceService) GetRoles(ctx context.Context, req *GetRolesReq) (*GetRolesResp, error) {
+func (m *MockPolarBearUserServiceService) GetRoles(ctx context.Context, req *GetRolesRequest) (*GetRolesResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetRoles", ctx, req)
-	ret0, _ := ret[0].(*GetRolesResp)
+	ret0, _ := ret[0].(*GetRolesResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -72,10 +72,10 @@ func (mr *MockPolarBearUserServiceServiceMockRecorder) GetRoles(ctx, req any) *g
 }
 
 // GetUserInfo mocks base method.
-func (m *MockPolarBearUserServiceService) GetUserInfo(ctx context.Context, req *GetUserInfoReq) (*GetUserInfoResp, error) {
+func (m *MockPolarBearUserServiceService) GetUserInfo(ctx context.Context, req *GetUserInfoRequest) (*GetUserInfoResponse, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "GetUserInfo", ctx, req)
-	ret0, _ := ret[0].(*GetUserInfoResp)
+	ret0, _ := ret[0].(*GetUserInfoResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -141,14 +141,14 @@ func (m *MockPolarBearUserServiceClientProxy) EXPECT() *MockPolarBearUserService
 }
 
 // GetPermissions mocks base method.
-func (m *MockPolarBearUserServiceClientProxy) GetPermissions(ctx context.Context, req *GetPermissionsReq, opts ...client.Option) (*GetPermissionsResp, error) {
+func (m *MockPolarBearUserServiceClientProxy) GetPermissions(ctx context.Context, req *GetPermissionsRequest, opts ...client.Option) (*GetPermissionsResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetPermissions", varargs...)
-	ret0, _ := ret[0].(*GetPermissionsResp)
+	ret0, _ := ret[0].(*GetPermissionsResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -161,14 +161,14 @@ func (mr *MockPolarBearUserServiceClientProxyMockRecorder) GetPermissions(ctx, r
 }
 
 // GetRoles mocks base method.
-func (m *MockPolarBearUserServiceClientProxy) GetRoles(ctx context.Context, req *GetRolesReq, opts ...client.Option) (*GetRolesResp, error) {
+func (m *MockPolarBearUserServiceClientProxy) GetRoles(ctx context.Context, req *GetRolesRequest, opts ...client.Option) (*GetRolesResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetRoles", varargs...)
-	ret0, _ := ret[0].(*GetRolesResp)
+	ret0, _ := ret[0].(*GetRolesResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -181,14 +181,14 @@ func (mr *MockPolarBearUserServiceClientProxyMockRecorder) GetRoles(ctx, req any
 }
 
 // GetUserInfo mocks base method.
-func (m *MockPolarBearUserServiceClientProxy) GetUserInfo(ctx context.Context, req *GetUserInfoReq, opts ...client.Option) (*GetUserInfoResp, error) {
+func (m *MockPolarBearUserServiceClientProxy) GetUserInfo(ctx context.Context, req *GetUserInfoRequest, opts ...client.Option) (*GetUserInfoResponse, error) {
 	m.ctrl.T.Helper()
 	varargs := []any{ctx, req}
 	for _, a := range opts {
 		varargs = append(varargs, a)
 	}
 	ret := m.ctrl.Call(m, "GetUserInfo", varargs...)
-	ret0, _ := ret[0].(*GetUserInfoResp)
+	ret0, _ := ret[0].(*GetUserInfoResponse)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

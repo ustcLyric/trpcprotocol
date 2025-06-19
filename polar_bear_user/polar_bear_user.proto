@@ -47,10 +47,10 @@ message UserLoginResponse {
 // 用户信息获取
 
 // 用户信息获取
-message GetUserInfoReq {
+message GetUserInfoRequest {
 
 }
-message GetUserInfoResp {
+message GetUserInfoResponse {
     // 1.权限信息
     RoleInfo role_info = 1;
     // 2.菜单信息
@@ -108,19 +108,19 @@ message UserInfo {
 }
 
 // 菜单信息获取请求
-message GetPermissionsReq {
+message GetPermissionsRequest {
 
 }
 // 菜单信息获取响应
-message GetPermissionsResp {
+message GetPermissionsResponse {
     repeated Permission permissions = 1;
 }
 // 角色信息获取请求
-message GetRolesReq {
+message GetRolesRequest {
 
 }
 // 角色信息获取响应
-message GetRolesResp {
+message GetRolesResponse {
     repeated Role roles = 1;
 }
 
@@ -162,12 +162,12 @@ service PolarBearUserService {
     rpc UserLogin(UserLoginRequest) returns (UserLoginResponse){
     };
     // 获取用户信息
-    rpc GetUserInfo(GetUserInfoReq) returns (GetUserInfoResp){
+    rpc GetUserInfo(GetUserInfoRequest) returns (GetUserInfoResponse){
     };
     // 获取权限菜单信息
-    rpc GetPermissions(GetPermissionsReq) returns (GetPermissionsResp){
+    rpc GetPermissions(GetPermissionsRequest) returns (GetPermissionsResponse){
     };
     // 获取角色信息
-    rpc GetRoles(GetRolesReq) returns (GetRolesResp){
+    rpc GetRoles(GetRolesRequest) returns (GetRolesResponse){
     };
 }
